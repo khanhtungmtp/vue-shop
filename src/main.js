@@ -8,9 +8,11 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import 'popper.js'
 
 window.$ = window.jQuery = jQuery
+/* eslint-disable no-new */
+Vue.component('Navbar', require('./components/Navbar.vue').default)
+/* eslint-disable no-new */
 Vue.config.productionTip = false
 
-/* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
