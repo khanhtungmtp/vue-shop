@@ -46,45 +46,19 @@
           <div class=" sidebar-item sidebar-menu">
             <ul>
               <li class="header-menu">
-                <span>General</span>
-              </li>
-              <li class="sidebar-dropdown">
-                <a href="#">
-                  <i class="fa fa-tachometer-alt"></i>
-                  <span class="menu-text">Dashboard</span>
-                  <span class="badge badge-pill badge-warning">New</span>
-                </a>
-                <div class="sidebar-submenu">
-                  <ul>
-                    <li>
-                      <a href="#">Dashboard 1
-                        <span class="badge badge-pill badge-success">Pro</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">Dashboard 2</a>
-                    </li>
-                    <li>
-                      <a href="#">Dashboard 3</a>
-                    </li>
-                  </ul>
-                </div>
-              </li>
-              <li class="header-menu">
                 <span>Extra</span>
               </li>
               <li>
-                <a href="#">
-                  <i class="fa fa-book"></i>
-                  <span class="menu-text">Documentation</span>
-                  <span class="badge badge-pill badge-primary">Beta</span>
-                </a>
+                <router-link to="/admin/overview">
+                  <i class="fa fa-chart-line"></i>
+                  <span class="menu-text">Overview</span>
+                </router-link>
               </li>
               <li>
-                <a href="#">
-                  <i class="fa fa-calendar"></i>
-                  <span class="menu-text">Calendar</span>
-                </a>
+                <router-link to="/admin/products">
+                  <i class="fa fa-amazon"></i>
+                  <span class="menu-text">Products</span>
+                </router-link>
               </li>
               <li>
                 <a href="#">
@@ -100,17 +74,7 @@
       </nav>
       <!-- page-content  -->
       <main class="page-content pt-2">
-        <div id="overlay" class="overlay"></div>
-        <div class="container-fluid p-5">
-          <div class="row">
-            <div class="form-group col-md-12">
-              <h2>Pro Sidebar</h2>
-              <p>This is a responsive sidebar template with dropdown menu based on bootstrap framework.</p>
-
-            </div>
-
-          </div>
-        </div>
+        <router-view/>
       </main>
       <!-- page-content" -->
     </div>
@@ -125,7 +89,7 @@ export default {
     Hero
   },
   methods: {
-    closeMenu() {
+    closeMenu () {
       window.$('.page-wrapper').toggleClass('togged')
     }
   }

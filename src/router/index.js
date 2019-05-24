@@ -4,6 +4,8 @@ import Home from '../Home'
 import About from '../components/About'
 import Admin from '../components/Admin'
 import Products from '../sections/Products'
+import Overview from '../components/Overview'
+import bProducts from '../components/bProducts'
 
 Vue.use(Router)
 
@@ -28,7 +30,19 @@ export default new Router({
     {
       path: '/admin',
       name: 'admin',
-      component: Admin
+      component: Admin,
+      children: [
+        {
+          path: 'overview',
+          name: 'overview',
+          component: Overview
+        },
+        {
+          path: 'products',
+          name: 'bProducts',
+          component: bProducts
+        }
+      ]
     }
   ]
 })
