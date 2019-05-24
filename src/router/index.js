@@ -6,6 +6,7 @@ import Admin from '../components/Admin'
 import Products from '../sections/Products'
 import Overview from '../components/Overview'
 import bProducts from '../components/bProducts'
+import Order from '../components/Order'
 
 Vue.use(Router)
 
@@ -41,6 +42,11 @@ export default new Router({
           path: 'products',
           name: 'bProducts',
           component: bProducts
+        },
+        {
+          path: 'order',
+          name: 'order',
+          component: Order
         }
       ]
     }

@@ -16,7 +16,7 @@
           <!-- sidebar-header  -->
           <div class="sidebar-item sidebar-header d-flex flex-nowrap">
             <div class="user-pic">
-              <img class="img-responsive img-rounded" src="img/user.jpg" alt="User picture">
+              <img class="img-responsive img-rounded" src="../../public/img/user.png" alt="User picture">
             </div>
             <div class="user-info">
                         <span class="user-name">Jhon
@@ -46,7 +46,7 @@
           <div class=" sidebar-item sidebar-menu">
             <ul>
               <li class="header-menu">
-                <span>Extra</span>
+                <span>Menu</span>
               </li>
               <li>
                 <router-link to="/admin/overview">
@@ -56,15 +56,15 @@
               </li>
               <li>
                 <router-link to="/admin/products">
-                  <i class="fa fa-amazon"></i>
+                  <i class="fab fa-amazon"></i>
                   <span class="menu-text">Products</span>
                 </router-link>
               </li>
               <li>
-                <a href="#">
-                  <i class="fa fa-folder"></i>
-                  <span class="menu-text">Examples</span>
-                </a>
+                <router-link to="/admin/order">
+                  <i class="fa fa-shopping-cart"></i>
+                  <span class="menu-text">Order</span>
+                </router-link>
               </li>
             </ul>
           </div>
