@@ -50,12 +50,9 @@
 </template>
 
 <script>
-  export default {
-    name: "Products",
-    props: {
-      msg: String
-    }
-  };
+export default {
+  name: 'Products'
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

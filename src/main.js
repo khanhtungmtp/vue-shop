@@ -6,13 +6,11 @@ import jQuery from 'jquery'
 import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'popper.js'
+import './assets/admin.scss'
 
 window.$ = window.jQuery = jQuery
-/* eslint-disable no-new */
 Vue.component('Navbar', require('./components/Navbar.vue').default)
-/* eslint-disable no-new */
 Vue.config.productionTip = false
-
 new Vue({
   el: '#app',
   router,
