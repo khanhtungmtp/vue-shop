@@ -7,12 +7,18 @@ import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'popper.js'
 import './assets/admin.scss'
-
+import {fb} from './firebase'
 window.$ = window.jQuery = jQuery
 Vue.component('Navbar', require('./components/Navbar.vue').default)
 Vue.config.productionTip = false
-new Vue({
-  el: '#app',
-  router,
-  render: h => h(App)
+let app = ''
+fb.auth().onAuthStateChanged(function (user) {
+  // đăng nhập rồi thì vào thẳng admin
+  if (!app) {
+    new Vue({
+      el: '#app',
+      router,
+      render: h => h(App)
+    })
+  }
 })
