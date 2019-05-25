@@ -1,65 +1,79 @@
 <template>
   <div class="products" id="products">
     <div class="container">
-      <h1 class="text-center p-5">Our Products</h1>
-      <div class="row">
-
-        <div class="col-md-4">
-          <div class="card product-item">
-            <img src="/img/products/product1.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">Surface Book 2</h5>
-              <p class="card-text">
-                Complete your device with Office 365 and get 1TB cloud storage, Excel, Word, PowerPoint & more. Select your suite during checkout.
-              </p>
-              <a href="#" class="btn btn-primary">Add to Cart</a>
-            </div>
+      <div class="intro h-100">
+        <div class="row h-100 justify-content-center align-items-center">
+          <div class="col-md-6">
+            <h3>Products page</h3>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium, saepe!
+            </p>
           </div>
-        </div>
-
-        <div class="col-md-4">
-          <div class="card product-item">
-            <img src="/img/products/product2.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">Surface Laptop 2</h5>
-              <p class="card-text">
-                Style and speed. Go beyond the traditional with new Surface Laptop 2. Featuring improved performance and the full Windows 10 Home experience.
-              </p>
-              <a href="#" class="btn btn-primary">Add to Cart</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-4">
-          <div class="card product-item">
-            <img src="/img/products/product3.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">Surface Studio 2</h5>
-              <p class="card-text">
-                The ultimate creative studio. Let your ideas flow with brilliant color, blazing graphics, faster processors, intuitive tools, and a stunning, adjustable 28” display.
-
-              </p>
-              <a href="#" class="btn btn-primary">Add to Cart</a>
-            </div>
+          <div class="col-md-6">
+            <img src="../../public/img/svg/product.svg" alt="" class="img-fluid">
           </div>
         </div>
       </div>
     </div>
-
+    <hr>
+    <h3>Basic CRUD (create/read/update/delete)</h3>
+    <div class="product-test">
+      <div class="form-group">
+        <input type="text" placeholder="product name" v-model="products.name" class="form-control">
+      </div>
+      <div class="form-group">
+        <input type="text" placeholder="price" v-model="products.price" class="form-control">
+      </div>
+      <div class="form-group">
+        <button @click="saveData" class="btn btn-primary">Lưu</button>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import {db, fb} from '../firebase'
 export default {
-  name: 'Products'
+  name: 'Products',
+  data () {
+    return {
+      products: {
+        name: null,
+        price: null
+      }
+    }
+  },
+  methods: {
+    saveData () {
+      // Add a new document with a generated id.
+      db.collection('products').add(this.products)
+        .then((docRef) => {
+          console.log('Document written with ID: ', docRef.id)
+          this.resetData()
+        })
+        .catch(function (error) {
+          console.error('Error adding document: ', error)
+        })
+    },
+    resetData () {
+      // reset data khi submit form
+      Object.assign(this.$data, this.$options.data.apply(this))
+    }
+  }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-  .products{
-    margin-top: 7rem;
-    background: #f2f2f2;
-    padding-bottom: 3rem;
+  .img-wrapp{
+    position: relative;
+  }
+  .img-wrapp span.delete-img{
+    position: absolute;
+    top: -14px;
+    left: -2px;
+  }
+  .img-wrapp span.delete-img:hover{
+    cursor: pointer;
   }
 </style>
