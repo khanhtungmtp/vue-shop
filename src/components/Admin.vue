@@ -66,6 +66,12 @@
                   <span class="menu-text">Order</span>
                 </router-link>
               </li>
+              <li>
+                <a href="#" @click="logout()">
+                  <i class="fa fa-shopping-cart"></i>
+                  <span class="menu-text">Đăng xuất</span>
+                </a>
+              </li>
             </ul>
           </div>
           <!-- sidebar-menu  -->
@@ -83,6 +89,7 @@
 <!-- page-wrapper -->
 <script>
 import Hero from './Hero'
+import {fb} from '../firebase'
 export default {
   name: 'Admin',
   components: {
@@ -91,6 +98,15 @@ export default {
   methods: {
     closeMenu () {
       window.$('.page-wrapper').toggleClass('togged')
+    },
+    logout () {
+      fb.auth().signOut()
+        .then(() => {
+          this.$router.replace('/')
+        })
+        .catch((error) => {
+          console.log(error)
+        })
     }
   }
 }
