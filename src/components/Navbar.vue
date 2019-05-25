@@ -19,8 +19,8 @@
           </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-          <a class="btn btn-outline-success my-2 my-sm-0" data-toggle="modal" data-target="#login">Search</a>
+          <input class="form-control mr-sm-2" type="search" placeholder="Tìm kiếm..." aria-label="Search">
+          <a class="btn btn-outline-success my-2 my-sm-0" data-toggle="modal" data-target="#login">Đăng nhập</a>
         </form>
       </div>
     </nav>

@@ -9,6 +9,6 @@ var firebaseConfig = {
   storageBucket: 'vue-shop-d76d4.appspot.com',
   messagingSenderId: '405600291689',
   appId: '1:405600291689:web:1e353fdf3ee70bcd'
-};
+}
 // Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+export const fb = firebase.initializeApp(firebaseConfig)
