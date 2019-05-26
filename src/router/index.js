@@ -8,7 +8,6 @@ import Overview from '../components/Overview'
 import bProducts from '../components/bProducts'
 import Order from '../components/Order'
 import {fb} from '../firebase'
-
 Vue.use(Router)
 
 const router = new Router({
