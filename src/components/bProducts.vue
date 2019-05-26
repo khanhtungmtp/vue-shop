@@ -48,13 +48,37 @@
             {{ product.data().price }}
           </td>
           <td>
-            <button class="btn btn-primary">Thêm</button>
+            <button @click="editProduct(product)" class="btn btn-warning">Sửa</button>
             <button @click="deleteProduct(product.id)" class="btn btn-danger">Xóa</button>
-            <button class="btn btn-warning">Sửa</button>
           </td>
         </tr>
         </tbody>
       </table>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="editLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="editLabel">Sửa sản phẩm</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <input type="text" placeholder="product name" v-model="product.name" class="form-control">
+            </div>
+            <div class="form-group">
+              <input type="text" placeholder="price" v-model="product.price" class="form-control">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+            <button @click="updateProduct()" type="button" class="btn btn-primary">Lưu</button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -69,10 +93,27 @@ export default {
       product: {
         name: null,
         price: null
-      }
+      },
+      activeItem: null
     }
   },
   methods: {
+    updateProduct (doc) {
+      db.collection('products').doc(this.activeItem).update(this.product)
+        .then(function () {
+          window.$('#edit').modal('hide')
+          console.log('Cập nhập thành công')
+        })
+        .catch(function (error) {
+          // The document probably doesn't exist.
+          console.error('Có lỗi khi cập nhập', error)
+        })
+    },
+    editProduct (product) {
+      window.$('#edit').modal('show')
+      this.product = product.data()
+      this.activeItem = product.id
+    },
     deleteProduct (doc) {
       if (confirm('Bạn có chắc chắn muốn xóa')) {
         db.collection('products').doc(doc).delete().then(function () {
