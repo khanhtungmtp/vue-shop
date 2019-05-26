@@ -79,10 +79,9 @@
                   <input type="text" @keyup.188="addTag" placeholder="Product tags" v-model="tag" class="form-control">
 
                   <div class="d-flex">
-                    <p>
+                    <p v-for="(tag,key) in product.tags" v-bind:key="key">
                       <span class="p-1">{{tag}}</span>
                     </p>
-
                   </div>
                 </div>
                 <div class="form-group">
@@ -91,12 +90,12 @@
                 </div>
 
                 <div class="form-group d-flex">
-                  <div class="p-1">
-                    <div class="img-wrapp">
-                      <img alt="" width="80px">
-                      <span class="delete-img">X</span>
+                    <div class="p-1" v-for="(image, index) in product.images" v-bind:key="index">
+                      <div class="img-wrapp">
+                        <img :src="image" alt="" width="80px">
+                        <span class="delete-img">X</span>
+                      </div>
                     </div>
-                  </div>
                 </div>
 
               </div>
@@ -145,24 +144,25 @@ export default {
   },
   methods: {
     uploadImage (e) {
-      let file = e.target.files[0]
-      // Create a root reference
-      let storageRef = fb.storage().ref('product/' + file.name)
-      let uploadTask = storageRef.put(file)
-      uploadTask.on('state_changed', function (snapshot) {
-        console.log('')
-        // eslint-disable-next-line handle-callback-err
-      }, function (error) {
-        // Handle unsuccessful uploads
-      }, function () {
-        // Handle successful uploads on complete
-        // For instance, get the download URL: https://firebasestorage.googleapis.com/...
-        uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
-          this.product.images = downloadURL
-          console.log('File available at', downloadURL)
+      if (e.target.files[0]) {
+        let file = e.target.files[0]
+        // Create a root reference
+        let storageRef = fb.storage().ref('product/' + file.name)
+        let uploadTask = storageRef.put(file)
+        uploadTask.on('state_changed', (snapshot) => {
+          // eslint-disable-next-line handle-callback-err
+        }, (error) => {
+          // Handle unsuccessful uploads
+        }, () => {
+          // Handle successful uploads on complete
+          // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+          uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+            this.product.images.push(downloadURL)
+            console.log('File available at', downloadURL)
+          })
         })
-      })
-      console.log(e.target.files[0])
+        console.log(e.target.files[0])
+      }
     },
     addTag () {
       this.product.tags.push(this.tag)
