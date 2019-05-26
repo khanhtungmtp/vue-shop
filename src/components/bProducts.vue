@@ -76,25 +76,25 @@
                 </div>
 
                 <div class="form-group">
-                  <input type="text" @keyup.188="addTag" placeholder="Product tags" v-model="tag" class="form-control">
+                  <input type="text" placeholder="Product tags" v-model="tag" class="form-control">
 
                   <div class="d-flex">
-                    <p v-for="tag in product.tags">
+                    <p>
                       <span class="p-1">{{tag}}</span>
                     </p>
 
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="product_image">Product Images</label>
-                  <input type="file" @change="uploadImage" class="form-control">
+                  <label>Product Images</label>
+                  <input type="file" class="form-control">
                 </div>
 
                 <div class="form-group d-flex">
-                  <div class="p-1" v-for="(image, index) in product.images">
+                  <div class="p-1">
                     <div class="img-wrapp">
                       <img :src="image" alt="" width="80px">
-                      <span class="delete-img" @click="deleteImage(image,index)">X</span>
+                      <span class="delete-img">X</span>
                     </div>
                   </div>
                 </div>
@@ -104,10 +104,9 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button @click="addProduct()" type="button" class="btn btn-primary" v-if="modal == 'new'">Save changes
+            <button @click="addProduct()" type="button" class="btn btn-primary" v-if="this.modal === 'new'">Thêm
             </button>
-            <button @click="updateProduct()" type="button" class="btn btn-primary" v-if="modal == 'edit'">Apply
-              changes
+            <button @click="updateProduct()" type="button" class="btn btn-primary" v-if="this.modal === 'edit'">Cập nhập
             </button>
           </div>
         </div>
@@ -142,11 +141,30 @@ export default {
   },
   methods: {
     addNew () {
+      this.modal = 'new'
       window.$('#product').modal('show')
+    },
+    editProduct (product) {
+      this.modal = 'edit'
+      // lấy dữ liệu từ db ra
+      this.product = product
+      window.$('#product').modal('show')
+    },
+    updateProduct () {
+      this.$firestore.products.doc(this.product.id).update(this.product)
+      window.Toast.fire({
+        type: 'success',
+        title: 'Cập nhập thành công'
+      })
+      window.$('#product').modal('hide')
     },
     addProduct () {
       // thêm các trường sản phẩm vào mảng products
       this.$firestore.products.add(this.product)
+      window.Toast.fire({
+        type: 'success',
+        title: 'Thêm mới thành công'
+      })
       window.$('#product').modal('hide')
     },
     deleteProduct (doc) {

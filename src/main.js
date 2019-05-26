@@ -10,8 +10,13 @@ import './assets/admin.scss'
 import {fb} from './firebase'
 import VueFirestore from 'vue-firestore'
 import Swal from 'sweetalert2'
-window.Swal = Swal
 
+Vue.use(VueFirestore, {
+  key: 'id', // the name of the property. Default is '.key'.
+  enumerable: true // whether it is enumerable or not. Default is true.
+})
+
+window.Swal = Swal
 const Toast = Swal.mixin({
   toast: true,
   position: 'top-end',
@@ -22,6 +27,7 @@ const Toast = Swal.mixin({
 window.Toast = Toast
 
 Vue.use(VueFirestore)
+
 window.$ = window.jQuery = jQuery
 
 Vue.component('Navbar', require('./components/Navbar.vue').default)
