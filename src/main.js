@@ -9,8 +9,21 @@ import 'popper.js'
 import './assets/admin.scss'
 import {fb} from './firebase'
 import VueFirestore from 'vue-firestore'
+import Swal from 'sweetalert2'
+window.Swal = Swal
+
+const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 3000
+})
+
+window.Toast = Toast
+
 Vue.use(VueFirestore)
 window.$ = window.jQuery = jQuery
+
 Vue.component('Navbar', require('./components/Navbar.vue').default)
 Vue.config.productionTip = false
 let app = ''

@@ -37,7 +37,7 @@
           </td>
           <td>
             <button @click="editProduct(product)" class="btn btn-warning">Sửa</button>
-            <button @click="deleteProduct(product.id)" class="btn btn-danger">Xóa</button>
+            <button @click="deleteProduct(product)" class="btn btn-danger">Xóa</button>
           </td>
         </tr>
         </tbody>
@@ -148,6 +148,25 @@ export default {
       // thêm các trường sản phẩm vào mảng products
       this.$firestore.products.add(this.product)
       window.$('#product').modal('hide')
+    },
+    deleteProduct (doc) {
+      window.Swal.fire({
+        title: 'Bạn có chắc chắn muốn xóa?',
+        text: 'Dữ liệu không thể khôi phục!',
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Có, tôi muốn xóa!'
+      }).then((result) => {
+        if (result.value) {
+          this.$firestore.products.doc(doc['.key']).delete()
+          window.Toast.fire({
+            type: 'success',
+            title: 'Xóa thành công'
+          })
+        }
+      })
     }
   },
   created () {
