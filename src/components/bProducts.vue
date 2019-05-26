@@ -74,7 +74,15 @@ export default {
   },
   methods: {
     deleteProduct (doc) {
-      alert(doc)
+      if (confirm('Bạn có chắc chắn muốn xóa')) {
+        db.collection('products').doc(doc).delete().then(function () {
+          console.log('đã xóa')
+        }).catch(function (error) {
+          console.error('đã xảy ra lỗi khi xóa', error)
+        })
+      } else {
+        console.log('đã hủy tác vụ')
+      }
     },
     readData () {
       db.collection('products').get().then((querySnapshot) => {
