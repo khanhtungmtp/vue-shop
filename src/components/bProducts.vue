@@ -98,13 +98,23 @@ export default {
     }
   },
   methods: {
+    watcher () {
+      // phát hiện thay đổi dữ liệu khi update product
+      db.collection('products').onSnapshot((querySnapshot) => {
+        this.products = []
+        querySnapshot.forEach((doc) => {
+          this.products.push(doc)
+        })
+      })
+    },
     updateProduct (doc) {
       db.collection('products').doc(this.activeItem).update(this.product)
-        .then(function () {
+        .then(() => {
           window.$('#edit').modal('hide')
+          this.watcher()
           console.log('Cập nhập thành công')
         })
-        .catch(function (error) {
+        .catch((error) => {
           // The document probably doesn't exist.
           console.error('Có lỗi khi cập nhập', error)
         })

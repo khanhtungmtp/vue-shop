@@ -99,6 +99,7 @@ export default {
     login () {
       fb.auth().signInWithEmailAndPassword(this.email, this.password)
         .then(() => {
+          window.$('#login').modal('hide')
           this.$router.replace('admin')
         })
         .catch(function (error) {
