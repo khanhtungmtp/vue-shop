@@ -87,7 +87,7 @@
                 </div>
                 <div class="form-group">
                   <label>Product Images</label>
-                  <input  type="file" class="form-control">
+                  <input @change="uploadImage" type="file" class="form-control">
                 </div>
 
                 <div class="form-group d-flex">
@@ -144,6 +144,26 @@ export default {
     }
   },
   methods: {
+    uploadImage (e) {
+      let file = e.target.files[0]
+      // Create a root reference
+      let storageRef = fb.storage().ref('product/' + file.name)
+      let uploadTask = storageRef.put(file)
+      uploadTask.on('state_changed', function (snapshot) {
+        console.log('')
+        // eslint-disable-next-line handle-callback-err
+      }, function (error) {
+        // Handle unsuccessful uploads
+      }, function () {
+        // Handle successful uploads on complete
+        // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+        uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
+          this.product.images = downloadURL
+          console.log('File available at', downloadURL)
+        })
+      })
+      console.log(e.target.files[0])
+    },
     addTag () {
       this.product.tags.push(this.tag)
       this.tag = ''
