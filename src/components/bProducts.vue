@@ -76,7 +76,7 @@
                 </div>
 
                 <div class="form-group">
-                  <input type="text" placeholder="Product tags" v-model="tag" class="form-control">
+                  <input type="text" @keyup.188="addTag" placeholder="Product tags" v-model="tag" class="form-control">
 
                   <div class="d-flex">
                     <p>
@@ -87,13 +87,13 @@
                 </div>
                 <div class="form-group">
                   <label>Product Images</label>
-                  <input type="file" class="form-control">
+                  <input  type="file" class="form-control">
                 </div>
 
                 <div class="form-group d-flex">
                   <div class="p-1">
                     <div class="img-wrapp">
-                      <img :src="image" alt="" width="80px">
+                      <img alt="" width="80px">
                       <span class="delete-img">X</span>
                     </div>
                   </div>
@@ -117,8 +117,12 @@
 
 <script>
 import {db, fb} from '../firebase'
+import { VueEditor } from 'vue2-editor'
 export default {
   name: 'Products',
+  components: {
+    VueEditor
+  },
   data () {
     return {
       products: [],
@@ -140,6 +144,10 @@ export default {
     }
   },
   methods: {
+    addTag () {
+      this.product.tags.push(this.tag)
+      this.tag = ''
+    },
     addNew () {
       this.modal = 'new'
       window.$('#product').modal('show')

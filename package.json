@@ -18,7 +18,8 @@
     "sweetalert2": "^8.11.6",
     "vue": "^2.5.2",
     "vue-firestore": "^0.3.21",
-    "vue-router": "^3.0.1"
+    "vue-router": "^3.0.1",
+    "vue2-editor": "^2.6.6"
   },
   "devDependencies": {
     "@fortawesome/fontawesome-free": "^5.8.2",
