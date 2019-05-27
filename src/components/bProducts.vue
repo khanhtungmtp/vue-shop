@@ -93,7 +93,7 @@
                     <div class="p-1" v-for="(image, index) in product.images" v-bind:key="index">
                       <div class="img-wrapp">
                         <img :src="image" alt="" width="80px">
-                        <span class="delete-img">X</span>
+                        <span @click="deleteImage(image,index)" class="delete-img">X</span>
                       </div>
                     </div>
                 </div>
@@ -143,6 +143,18 @@ export default {
     }
   },
   methods: {
+    deleteImage (img, index) {
+    //  lấy ảnh muốn xóa
+      let image = fb.storage().refFromURL(img)
+
+      this.product.images.splice(index, 1)
+      image.delete().then(() => {
+        console.log('Đã xóa hình')
+        // eslint-disable-next-line handle-callback-err
+      }).catch((error) => {
+        console.log('Có lỗi khi xóa hình')
+      })
+    },
     uploadImage (e) {
       if (e.target.files[0]) {
         let file = e.target.files[0]

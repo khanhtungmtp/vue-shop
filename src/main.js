@@ -36,6 +36,7 @@ let app = ''
 fb.auth().onAuthStateChanged(function (user) {
   // đăng nhập rồi thì vào thẳng admin
   if (!app) {
+    /* eslint-disable no-new */
     new Vue({
       el: '#app',
       router,
