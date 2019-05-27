@@ -48,7 +48,8 @@
       <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="editLabel">Edit Product</h5>
+            <h5 v-show="this.modal === 'new'" class="modal-title" id="addLabel">Thêm mới</h5>
+            <h5 v-show="this.modal === 'edit'" class="modal-title" id="editLabel">Sửa sản phẩm</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -180,8 +181,18 @@ export default {
       this.product.tags.push(this.tag)
       this.tag = ''
     },
+    resetData () {
+      this.product = {
+        name: null,
+        description: null,
+        price: null,
+        tags: [],
+        images: []
+      }
+    },
     addNew () {
       this.modal = 'new'
+      this.resetData()
       window.$('#product').modal('show')
     },
     editProduct (product) {
