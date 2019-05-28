@@ -25,7 +25,7 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link"  id="account-tab" data-toggle="tab" href="#account" role="tab" aria-controls="account" aria-selected="false">Account settings</a>
+            <a class="nav-link"  id="account-tab" data-toggle="tab" href="#account" role="tab" aria-controls="account" aria-selected="false">Cài đặt tài khoản</a>
           </li>
 
         </ul>
@@ -62,7 +62,7 @@
 
                 <div class="col-md-4">
                   <div class="form-group">
-                    <input type="submit" @click="updateProfile" value="Save Changes" class="btn btn-primary w-100">
+                    <input type="submit" @click="updateProfile" value="Lưu" class="btn btn-primary w-100">
                   </div>
                 </div>
 
@@ -76,7 +76,7 @@
               <div class="row">
                 <div class="col-md-">
                   <div class="alert alert-info">
-                    Please use the Reset password email button for reseting the password. The form doens't work currently
+                    Vui lòng sử dụng nút Reset password email đặt lại mật khẩu. Biểu mẫu hiện không hoạt động
                   </div>
                 </div>
                 <div class="col-md-6">
@@ -167,7 +167,20 @@ export default {
   },
   methods: {
     resetPassword () {
-
+      const auth = fb.auth()
+      // console.log(auth.currentUser)
+      // lấy mail hiện đang đăng nhập
+      let emailAddress = auth.currentUser.email
+      auth.sendPasswordResetEmail(emailAddress).then(() => {
+        // Email sent.
+        window.Toast.fire({
+          type: 'success',
+          title: 'Gửi mail thành công, vui lòng check trong mail của bạn'
+        })
+      }).catch((error) => {
+        // An error happened.
+        console.log(error)
+      })
     },
     updateProfile () {
       this.$firestore.profile.update(this.profile)
