@@ -10,7 +10,9 @@ import './assets/admin.scss'
 import {fb} from './firebase'
 import VueFirestore from 'vue-firestore'
 import Swal from 'sweetalert2'
+import VueCarousel from 'vue-carousel'
 
+Vue.use(VueCarousel)
 Vue.use(VueFirestore, {
   key: 'id', // the name of the property. Default is '.key'.
   enumerable: true // whether it is enumerable or not. Default is true.

@@ -229,7 +229,7 @@ export default {
         confirmButtonText: 'Có, tôi muốn xóa!'
       }).then((result) => {
         if (result.value) {
-          this.$firestore.products.doc(doc['.key']).delete()
+          this.$firestore.products.doc(doc.id).delete()
           window.Toast.fire({
             type: 'success',
             title: 'Xóa thành công'
