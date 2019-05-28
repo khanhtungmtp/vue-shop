@@ -68,7 +68,7 @@
 </template>
 
 <script>
-import { fb } from '../firebase'
+import { fb, db } from '../firebase'
 export default {
   name: 'Login',
   data () {
@@ -81,13 +81,18 @@ export default {
   methods: {
     register () {
       fb.auth().createUserWithEmailAndPassword(this.email, this.password)
-        .then(() => {
+        .then((user) => {
           window.$('#login').modal('hide')
+          // console.log(user.user.uid)
+          // giống session, uid là trường mặc định của bản user trong firebase, để xác định user nào đang đký
+          db.collection('profiles').doc(user.user.uid).set({
+            name: this.name
+          })
           this.$router.replace('admin')
         })
         .catch(function (error) {
-          var errorCode = error.code
-          var errorMessage = error.message
+          let errorCode = error.code
+          let errorMessage = error.message
           if (errorCode === 'auth/week-password') {
             alert('Mật khẩu quá yếu')
           } else {
@@ -104,8 +109,8 @@ export default {
         })
         .catch(function (error) {
           // Handle Errors here.
-          var errorCode = error.code
-          var errorMessage = error.message
+          let errorCode = error.code
+          let errorMessage = error.message
           if (errorCode === 'auth/wrong-password') {
             alert('Wrong password')
           } else {

@@ -19,8 +19,8 @@
               <img class="img-responsive img-rounded" src="../../public/img/user.png" alt="User picture">
             </div>
             <div class="user-info">
-                        <span class="user-name">Jhon
-                            <strong>Smith</strong>
+                        <span class="user-name"> {{ name }}
+                            <strong>{{ email }}</strong>
                         </span>
               <span class="user-role">Administrator</span>
               <span class="user-status">
@@ -67,6 +67,12 @@
                 </router-link>
               </li>
               <li>
+                <router-link to="/admin/profile">
+                  <i class="fa fa-user"></i>
+                  <span class="menu-text">Profile</span>
+                </router-link>
+              </li>
+              <li>
                 <a href="#" @click="logout()">
                   <i class="fa fa-shopping-cart"></i>
                   <span class="menu-text">Đăng xuất</span>
@@ -92,6 +98,12 @@ import Hero from './Hero'
 import {fb} from '../firebase'
 export default {
   name: 'Admin',
+  data () {
+    return {
+      name: null,
+      email: null
+    }
+  },
   components: {
     Hero
   },
@@ -108,6 +120,10 @@ export default {
           console.log(error)
         })
     }
+  },
+  created () {
+    let user = fb.auth().currentUser
+    this.email = user.email
   }
 }
 </script>

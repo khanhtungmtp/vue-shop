@@ -8,6 +8,7 @@ import Overview from '../components/Overview'
 import bProducts from '../components/bProducts'
 import Order from '../components/Order'
 import {fb} from '../firebase'
+import Profile from '../components/Profile'
 Vue.use(Router)
 
 const router = new Router({
@@ -48,6 +49,11 @@ const router = new Router({
           path: 'order',
           name: 'order',
           component: Order
+        },
+        {
+          path: 'profile',
+          name: 'profile',
+          component: Profile
         }
       ]
     }
