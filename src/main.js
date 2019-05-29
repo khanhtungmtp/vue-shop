@@ -12,7 +12,7 @@ import VueFirestore from 'vue-firestore'
 import Swal from 'sweetalert2'
 import VueCarousel from 'vue-carousel'
 import Vue2Filters from 'vue2-filters'
-
+import store from './store'
 Vue.use(Vue2Filters)
 Vue.use(VueCarousel)
 Vue.use(VueFirestore, {
