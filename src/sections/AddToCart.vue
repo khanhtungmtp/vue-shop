@@ -15,14 +15,15 @@ export default {
   data () {
     return {
       item: {
-        ProductName: this.name,
-        ProductPrice: this.price,
-        ProductID: this.Product_id
+        productName: this.name,
+        productPrice: this.price,
+        productID: this.Product_id
       }
     }
   },
   methods: {
     addTocart () {
+      window.$('#miniCart').modal('show')
       this.$store.commit('addToCart', this.item)
     }
   }

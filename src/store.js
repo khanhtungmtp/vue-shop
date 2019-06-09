@@ -7,6 +7,7 @@ export default new Vuex.Store({
     cart: []
   },
   mutations: {
+    // giải pháp thêm sản phẩm vào mảng cart
     addToCart (state, item) {
       state.cart.push(item)
     }
