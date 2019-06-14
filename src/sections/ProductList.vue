@@ -21,7 +21,7 @@
         <!-- :product-image, :product-id, :price, :name là data của componets AddToCart -->
               <add-to-cart
                 :product-image="getImage(product.images)"
-                :product-price="product.price"
+                :product-id="product.id"
                 :price="product.price"
                 :name="product.name">
               </add-to-cart>
