@@ -2,10 +2,10 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 Vue.use(Vuex)
-
+let cart = window.localStorage.getItem('cart')
 export default new Vuex.Store({
   state: {
-    cart: []
+    cart: cart ? JSON.parse(cart) : []
   },
   mutations: {
     /** giải pháp thêm sản phẩm vào mảng cart
@@ -13,7 +13,6 @@ export default new Vuex.Store({
      * productID là data(), ko phải là props
      * */
     addToCart (state, item) {
-      console.log(item)
       // tìm trong mảng cart, nếu id trong mảng trùng với id sản phảm vừa thêm
       let found = state.cart.find(product => product.productID === item.productID)
       if (found) {
@@ -21,6 +20,10 @@ export default new Vuex.Store({
       } else {
         state.cart.push(item)
       }
+      this.commit('saveData')
+    },
+    saveData (store) {
+      window.localStorage.setItem('cart', JSON.stringify(store.cart))
     }
   }
 })
