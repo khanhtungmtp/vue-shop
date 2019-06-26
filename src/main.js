@@ -37,6 +37,7 @@ window.$ = window.jQuery = jQuery
 Vue.component('Navbar', require('./components/Navbar.vue').default)
 Vue.component('add-to-cart', require('./sections/AddToCart.vue').default)
 Vue.component('mini-cart', require('./sections/MiniCart.vue').default)
+Vue.component('checkout', require('./sections/Checkout.vue').default)
 Vue.config.productionTip = false
 let app = ''
 fb.auth().onAuthStateChanged(function (user) {

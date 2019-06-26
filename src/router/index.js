@@ -9,6 +9,7 @@ import bProducts from '../components/bProducts'
 import Order from '../components/Order'
 import {fb} from '../firebase'
 import Profile from '../components/Profile'
+import Checkout from '../sections/Checkout'
 Vue.use(Router)
 
 const router = new Router({
@@ -28,6 +29,11 @@ const router = new Router({
       path: '/products',
       name: 'products',
       component: Products
+    },
+    {
+      path: '/checkout',
+      name: 'checkout',
+      component: Checkout
     },
     {
       path: '/admin',

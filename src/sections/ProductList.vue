@@ -18,12 +18,12 @@
                 <h5 class="card-title">{{ product.name }}</h5>
                 <h5 class="card-priceS">{{ product.price | currency }}</h5>
               </div>
-        <!-- :product-image, :product-id, :price, :name là data của componets AddToCart -->
+        <!-- :product-image, :product-id, :price, :name là props của componets AddToCart -->
               <add-to-cart
-                :product-image="getImage(product.images)"
                 :product-id="product.id"
                 :price="product.price"
-                :name="product.name">
+                :name="product.name"
+                :image="getImage(product.images)">
               </add-to-cart>
             </div>
           </div>
@@ -48,6 +48,7 @@ export default {
   methods: {
     getImage (images) {
       // console.log(images)
+      // do sản phẩm có nhiều hình, nên chọn 1 hình thứ 1 đại diện thôi
       return images[0]
     }
   },

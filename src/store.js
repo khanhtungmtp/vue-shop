@@ -13,6 +13,7 @@ export default new Vuex.Store({
      * productID là data(), ko phải là props
      * */
     addToCart (state, item) {
+      console.log(item)
       // tìm trong mảng cart, nếu id trong mảng trùng với id sản phảm vừa thêm
       let found = state.cart.find(product => product.productID === item.productID)
       if (found) {
