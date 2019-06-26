@@ -15,7 +15,9 @@
                 <li v-for="(item,index) in $store.state.cart" v-bind:key="index" class="media">
                   <img :src="item.productImage" width="80px" class="align-self-center mr-3" alt="">
                   <div class="media-body">
-                    <h5 class="mt-0">{{ item.productName }}</h5>
+                    <h5 class="mt-0">{{ item.productName }}
+                    <span class="float-right" @click="$store.commit('removeFromCart')">X</span>
+                    </h5>
                     <p class="mt-0">{{ item.productPrice | currency }}</p>
                     <p class="mt-0">Số lượng {{ item.productQuantity}}</p>
                   </div>

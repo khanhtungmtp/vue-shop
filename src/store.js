@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 let cart = window.localStorage.getItem('cart')
+
 export default new Vuex.Store({
   state: {
     cart: cart ? JSON.parse(cart) : []
@@ -24,6 +25,12 @@ export default new Vuex.Store({
     },
     saveData (store) {
       window.localStorage.setItem('cart', JSON.stringify(store.cart))
+    },
+    removeFromCart (store, item) {
+      // tìm vị trí item
+      let index = store.cart.indexOf(item)
+      store.cart.splice(index, 1)
+      this.commit('saveData')
     }
   }
 })
